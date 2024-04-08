@@ -6,7 +6,7 @@
   require_once __DIR__.'/vendor/phpmailer/index.php';
 
  
-  $db = mysqli_connect("127.0.0.1:3306", "root", "Muruu0729", "zaal");
+  $db = mysqli_connect("hostname", "username", "Password", "db_name");
   $db->set_charset("utf8");
   $actual_link = (isset($_SERVER['HTTPS']) ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
   date_default_timezone_set("Asia/Ulaanbaatar");
