@@ -1,0 +1,14 @@
+---
+stages:
+  - deploy
+
+deploy:
+  stage: deploy
+  script:
+    - mkdir -p ~/.ssh
+    - echo "$LIGHTSAIL_PRIVATE_KEY_PAPAYA" > ~/.ssh/lightsail-private-key
+    - chmod 600 ~/.ssh/lightsail-private-key
+    - ssh -o StrictHostKeyChecking=no -i ~/.ssh/lightsail-private-key ubuntu@35.77.106.24 'bash -s' < shell.sh
+  rules:
+    # so we don't trigger a release job when semantic-release pushes the release
+    - if: '$CI_COMMIT_BRANCH == "main" && $CI_COMMIT_MESSAGE =~ /main/'
